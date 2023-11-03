@@ -27,7 +27,7 @@ class TipCalculatorApp(App):
         calculate_button.bind(on_press=self.calculate_tip)
         layout.add_widget(calculate_button)
 
-        self.result_label = Label()
+        self.result_label = TextInput(hint_text="Total to pay: ", readonly=True, multiline=True)
         layout.add_widget(self.result_label)
 
         return layout
@@ -41,7 +41,8 @@ class TipCalculatorApp(App):
             tip_amount = (bill * tip_percentage / 100) / number_of_people
             total_per_person = (bill / number_of_people) + tip_amount
 
-            self.result_label.text = f"Each person should leave a ${tip_amount:.2f} tip, and pay ${total_per_person:.2f} in total."
+            result_text = f"Each person should leave a ${tip_amount:.2f} tip, and pay ${total_per_person:.2f} in total."
+            self.result_label.text = result_text
 
         except (ValueError, ZeroDivisionError):
             self.result_label.text = "Please enter valid values."
